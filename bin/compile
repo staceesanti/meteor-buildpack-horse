@@ -173,7 +173,7 @@ echo "Meteor node version is ${METEOR_NODE_VERSION}"
 touch $HOME/.bashrc
 if [[ "${METEOR_NODE_VERSION}" =~ ^v4\.[0-9]+\.[0-9]+$ ]]; then
   echo "Installing yarn 1.12.3"
-  curl -o- -L https://yarnpkg.com/install.sh --version 1.12.3 | bash
+  curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.3
 else
   echo "Installing latest yarn"
   curl -o- -L https://yarnpkg.com/install.sh | bash
