@@ -165,9 +165,19 @@ chmod a+x "$NODE"
 # Add npm and node path so that 1.4's npm-rebuild.js will function.
 PATH="$METEOR_DIR/.meteor:`dirname $METEOR_NPM`:$COMPILE_DIR/bin:$PATH"
 
+METEOR_NODE_VERSION=$(METEOR node -v)
+
+echo "Meteor node version is ${METEOR_NODE_VERSION}"
+
 # install yarn
 touch $HOME/.bashrc
-curl -o- -L https://yarnpkg.com/install.sh | bash
+if [[ "${METEOR_NODE_VERSION}" =~ ^v4\.[0-9]+\.[0-9]+$ ]]; then
+  echo "Installing yarn 1.12.3"
+  curl -o- -L https://yarnpkg.com/install.sh --version 1.12.3 | bash
+else
+  echo "Installing latest yarn"
+  curl -o- -L https://yarnpkg.com/install.sh | bash
+fi
 export PATH="$HOME/.yarn/bin:$PATH"
 
 echo "-----> Using node: `$NODE --version`"
