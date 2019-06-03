@@ -184,6 +184,14 @@ echo "-----> Using node: `$NODE --version`"
 echo "----->    and npm: `$METEOR_NPM --version`"
 echo "----->    and yarn: `yarn --version`"
 
+echo "Now at:"
+pwd
+ls -la
+echo "Package:"
+ls -la packages/push/.npm/package
+rm -rf packages/push/.npm/package/node_modules
+rm -f packages/push/.npm/package/npm-shrinkwrap.json
+
 # If we use npm on root, run npm install.  Don't use `--production` here, as we
 # may need devDependencies (e.g. webpack) in order to build the meteor app.
 if [ -e "$APP_SOURCE_DIR"/package.json ]; then
@@ -205,10 +213,6 @@ if [ -n "${BUILDPACK_PRELAUNCH_METEOR+1}" ]; then
   METEOR remove-platform android || true
   HOME=$METEOR_DIR timeout -s9 60 $METEOR_DIR/.meteor/meteor --settings settings.json || true
 fi
-
-echo "Now at:"
-pwd
-ls -la
 
 # Now on to bundling. Don't put the bundle in $APP_CHECKOUT_DIR during
 # bundling, or it will recurse, trying to bundle up its own bundling.
