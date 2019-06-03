@@ -202,6 +202,9 @@ if [ -e "$APP_SOURCE_DIR"/package.json ]; then
   fi
 fi
 
+echo "What's inside:"
+ls -la packages/push/.npm/package/node_modules
+
 # Related to https://github.com/meteor/meteor/issues/2796 and
 # https://github.com/meteor/meteor/issues/2606.  Some packages only build their
 # assets at runtime, and thus they are not available for bundling unless meteor
