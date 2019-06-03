@@ -190,7 +190,7 @@ if [ -e "$APP_SOURCE_DIR"/package.json ]; then
   if [[ "${METEOR_NODE_VERSION}" =~ ^v4\.[0-9]+\.[0-9]+$ ]]; then
     yarn install --ignore-engines
   else
-    yarn install
+    yarn install --force
   fi
 fi
 
